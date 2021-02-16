@@ -1,0 +1,16 @@
+# file types
+.DS_Store
+*.log
+
+# files
+.env
+process.yml
+
+# directories
+.idea
+.vscode
+coverage
+node_modules
+public/build
+public/loadable-stats.json
+public/webpack-assets.json
