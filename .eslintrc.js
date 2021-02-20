@@ -27,5 +27,7 @@ module.exports = {
     semi: ["error", "always"],
     quotes: ["error", "double"],
     "react/jsx-filename-extension": [2, { extensions: [".js", ".jsx", ".ts", ".tsx"] }],
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
   },
 };
