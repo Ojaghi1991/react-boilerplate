@@ -1,6 +1,5 @@
-import React, { FC } from "react";
-import ReactDom from "react-dom";
+import React from 'react';
+import ReactDom from 'react-dom';
+import App from './components';
 
-const App: FC = () => <div> Start Boilerplate </div>;
-
-ReactDom.render(<App />, document.getElementById("root"));
+ReactDom.hydrate(<App />, document.getElementById('react-view'));
