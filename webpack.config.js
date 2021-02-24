@@ -1,17 +1,15 @@
-const path = require("path");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-
-const htmlPlugin = new HtmlWebPackPlugin({
-  template: "./public/index.html",
-});
+const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   // Our application entry point.
-  entry: "./src/index.tsx",
-  mode:'development',
-  // These rules define how to deal 
+  entry: './src/server/index.tsx',
+  mode: 'development',
+  target: 'node',
+  externals: [nodeExternals()],
+  // These rules define how to deal
   // with files with given extensions.
-  // For example, .tsx files 
+  // For example, .tsx files
   // will be compiled with ts-loader,
   // a spcific loader for webpack
   // that knows how to work with TypeScript files.
@@ -19,7 +17,7 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
+        use: 'ts-loader',
         exclude: /node_modules/,
       },
     ],
@@ -28,20 +26,13 @@ module.exports = {
   // Telling webpack which extensions
   // we are interested in.
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: ['.tsx', '.ts', '.js'],
   },
 
   // What file name should be used for the result file,
   // and where it should be palced.
   output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "dist"),
+    filename: 'build/bundle.js',
+    path: path.resolve(__dirname, 'public'),
   },
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    port: 3000
-  },
-  // Use the html plugin.
-  plugins: [htmlPlugin],
 };
