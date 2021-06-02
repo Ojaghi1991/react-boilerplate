@@ -11,6 +11,7 @@ process.yml
 .vscode
 coverage
 node_modules
+dist
 public/build
 public/loadable-stats.json
 public/webpack-assets.json

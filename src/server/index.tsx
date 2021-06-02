@@ -12,8 +12,7 @@ import routes from '../router';
 const PORT = process.env.PORT || 3000;
 const expressApp = express();
 
-expressApp.use(express.static('../../public'));
-
+expressApp.use(express.static('../../dist'));
 if (process.env.NODE_ENV === 'development') {
   /* Run express as webpack dev server */
   const webpack = require('webpack');
@@ -39,7 +38,7 @@ if (process.env.NODE_ENV === 'development') {
   expressApp.use(require('webpack-hot-middleware')(compiler));
 }
 
-const statsFile = path.resolve('./public/loadable-stats.json');
+const statsFile = path.resolve('./dist/loadable-stats.json');
 
 expressApp.get('*', (req: express.Request, res: express.Response) => {
   const extractor = new ChunkExtractor({ statsFile });
