@@ -1,8 +1,10 @@
 import React from 'react';
+import path from 'path';
 import express from 'express';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
+import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
 
 import htmlContent from '../utils/htmlContent';
 import routes from '../router';
@@ -37,14 +39,20 @@ if (process.env.NODE_ENV === 'development') {
   expressApp.use(require('webpack-hot-middleware')(compiler));
 }
 
+const statsFile = path.resolve('./public/loadable-stats.json');
+
 expressApp.get('*', (req: express.Request, res: express.Response) => {
+  const extractor = new ChunkExtractor({ statsFile });
+
   const component = (
-    <StaticRouter location={req.path} context={{}}>
-      {renderRoutes(routes)}
-    </StaticRouter>
+    <ChunkExtractorManager extractor={extractor}>
+      <StaticRouter location={req.path} context={{}}>
+        {renderRoutes(routes)}
+      </StaticRouter>
+    </ChunkExtractorManager>
   );
   const content = renderToString(component);
-  return res.send(htmlContent(content));
+  return res.send(htmlContent(content, extractor));
 });
 
 expressApp.listen(PORT, () => {
