@@ -10,6 +10,7 @@ export default (
       </head>
       <body>
         <div id="react-view">${content}</div>
+        <script src="build/bundle.js"></script>
       </body>
     </html>
   `;

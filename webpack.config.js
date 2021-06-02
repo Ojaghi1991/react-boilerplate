@@ -11,8 +11,6 @@ module.exports = {
     ? ['webpack-hot-middleware/client?reload=true', './src/client/index.tsx']
     : ['./src/client/index.tsx'],
   mode: isDev ? 'development' : 'production',
-  target: 'node',
-  externals: [nodeExternals()],
   // These rules define how to deal
   // with files with given extensions.
   // For example, .tsx files
