@@ -1,10 +1,16 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const webpack = require('webpack');
+
+const mode = process.env.NODE_ENV || 'development';
+const isDev = mode === 'development';
 
 module.exports = {
-  // Our application entry point.
-  entry: './src/server/index.tsx',
-  mode: 'development',
+  devtool: isDev ? 'eval-source-map' : false,
+  entry: isDev
+    ? ['webpack-hot-middleware/client?reload=true', './src/client/index.tsx']
+    : ['./src/client/index.tsx'],
+  mode: isDev ? 'development' : 'production',
   target: 'node',
   externals: [nodeExternals()],
   // These rules define how to deal
@@ -28,7 +34,7 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
-
+  plugins: isDev ? [new webpack.HotModuleReplacementPlugin()] : [],
   // What file name should be used for the result file,
   // and where it should be palced.
   output: {
