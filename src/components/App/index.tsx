@@ -1,10 +1,11 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { renderRoutes } from 'react-router-config';
+import { hot } from 'react-hot-loader';
 
-const App: FC = ({ route }: any) => (
+const App = ({ route }: any) => (
   <div>
     {renderRoutes(route.routes)}
   </div>
 );
 
-export default App;
+export default hot(module)(App);
