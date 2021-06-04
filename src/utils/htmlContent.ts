@@ -1,5 +1,6 @@
 export default (
   content: string,
+  extractor: Record<string, any>,
 ): string => {
   const htmlContent = `
     <!doctype html>
@@ -7,10 +8,12 @@ export default (
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      </head>
+        ${extractor.getLinkTags()}
+        ${extractor.getStyleTags()}
+        </head>
       <body>
         <div id="react-view">${content}</div>
-        <script src="build/bundle.js"></script>
+        ${extractor.getScriptTags()}
       </body>
     </html>
   `;

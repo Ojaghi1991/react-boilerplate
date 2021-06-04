@@ -1,6 +1,6 @@
 const path = require('path');
-const nodeExternals = require('webpack-node-externals');
 const webpack = require('webpack');
+const LoadablePlugin = require('@loadable/webpack-plugin');
 
 const mode = process.env.NODE_ENV || 'development';
 const isDev = mode === 'development';
@@ -32,11 +32,18 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },
-  plugins: isDev ? [new webpack.HotModuleReplacementPlugin()] : [],
+  plugins: isDev ? [new webpack.HotModuleReplacementPlugin(), new LoadablePlugin({
+    writeToDisk: true,
+    filename: './loadable-stats.json',
+  })] : [new LoadablePlugin({
+    writeToDisk: true,
+    filename: './loadable-stats.json',
+  })],
   // What file name should be used for the result file,
   // and where it should be palced.
   output: {
-    filename: 'build/bundle.js',
-    path: path.resolve(__dirname, 'public'),
+    filename: isDev ? '[name].js' : '[name].[hash:8].js',
+    path: path.resolve(process.cwd(), 'dist'),
+    publicPath: '/',
   },
 };
