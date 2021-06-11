@@ -12,5 +12,5 @@ export default [
    * u: UPDATE
    * d: DELETE
    */
-  promise('user'),
+  promise('user','claud'),
 ];
