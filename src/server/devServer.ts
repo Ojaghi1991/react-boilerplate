@@ -4,7 +4,7 @@ import hotMiddleware from 'webpack-hot-middleware';
 
 import webpackConfig from '../../webpack.config.js';
 
-const devServer = (expressApp) => {
+const devServer = (expressApp: any) => {
   const PORT = process.env.PORT || 3000;
   const compiler = webpack(webpackConfig);
   const instance = devMiddleware(compiler, {
