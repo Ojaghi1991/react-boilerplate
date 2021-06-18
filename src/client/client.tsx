@@ -15,7 +15,7 @@ const hotModule = (module as any);
 const render = (routes: Array<any>) => (hotModule.hot ? ReactDOM.render : ReactDOM.hydrate)(
   <AppContainer>
     <Provider store={store}>
-      <BrowserRouter>{renderRoutes(routes)}</BrowserRouter>
+      <BrowserRouter>{renderRoutes(routes, { store })}</BrowserRouter>
     </Provider>
   </AppContainer>,
   document.getElementById('react-view'),
