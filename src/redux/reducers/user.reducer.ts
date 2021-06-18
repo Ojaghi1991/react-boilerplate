@@ -13,6 +13,7 @@ export default (state = initialState, action:any) => {
       return {
         ...state,
         fetching: true,
+        errors: action
       };
 
     case ActionTypes.LOAD_ALL_USER_SUCCESS:
@@ -25,7 +26,7 @@ export default (state = initialState, action:any) => {
     case ActionTypes.LOAD_ALL_USER_FAILURE:
       return {
         ...state,
-        error: action.error,
+        erroru: action.error,
         fetching: false,
       };
 

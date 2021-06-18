@@ -8,8 +8,8 @@ const isDev = mode === 'development';
 module.exports = {
   devtool: isDev ? 'eval-source-map' : false,
   entry: isDev
-    ? ['webpack-hot-middleware/client?reload=true', './src/client/index.tsx']
-    : ['./src/client/index.tsx'],
+    ? ['webpack-hot-middleware/client?reload=true', './src/client/client.tsx']
+    : ['./src/client/client.tsx'],
   mode: isDev ? 'development' : 'production',
   // These rules define how to deal
   // with files with given extensions.
