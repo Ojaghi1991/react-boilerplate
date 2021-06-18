@@ -38,7 +38,7 @@ export default ({
   ...rest
 }: any) => {
   const parameters = rest;
-  const authorization = token || cookies.get('application_api_token');
+  const authorization = token || cookies.get('application-api-token');
 
   if (filesForm) {
     const formData = createFormData(filesForm);
