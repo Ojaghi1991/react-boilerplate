@@ -31,7 +31,6 @@ expressApp.get('*', (req: express.Request, res: express.Response) => {
   const store = createStore({});
  
   const loadData = () => {
-    console.log('object',matchRoutes(routes, req.path));
     const promises = matchRoutes(routes, req.path)
     
       .map(({ route, match }: Record<string, any>) =>
