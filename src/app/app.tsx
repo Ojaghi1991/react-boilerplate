@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { hot } from 'react-hot-loader';
 import { useDispatch } from "react-redux";
 import { matchRoutes, renderRoutes } from "react-router-config";
@@ -6,23 +6,42 @@ import { urlHelper } from "../helpers"
 import { get } from 'lodash';
 
 const App = ({location, route, store}:any) => {
+  const currentPathURL = location.pathname + location.search;
 
-const matchedRoutes = matchRoutes(route.routes, location.pathname);
-const params = matchedRoutes.reduce(
-  (acc, { match }) => ({ ...acc, ...match.params }),
-  {}
-);
-const query = urlHelper.parse(location);
-const dispatch = useDispatch();
-if(get(process,'browser',false)) {
-  matchedRoutes
-      .map(({ route: { loadData } }) =>
-        loadData ? loadData({ getState: store.getState, params, query }) : []
-      )
-      // @ts-ignore
-      .flat()
-      .filter((item) => !!item)
-      .forEach(dispatch);
+  const [pathURL, setPathURL] = useState(currentPathURL);
+
+  const matchedRoutes = matchRoutes(route.routes, location.pathname);
+  const params = matchedRoutes.reduce(
+    (acc, { match }) => ({ ...acc, ...match.params }),
+    {}
+  );
+
+  // parsing the querystring from location.search
+  const query = urlHelper.parse(location);
+
+  // get dispatch method to dispatch action in client side
+  const dispatch = useDispatch();
+
+  /*
+   * prevent dispatch action in client side
+   * while it was dispatch on server side
+  */
+  if(
+    typeof window === "object" && 
+    (currentPathURL !== pathURL )
+  ) {
+    // fetch all action from loadData and filter the falsy
+    // finally dispatch it
+    matchedRoutes
+        .map(({ route: { loadData } }) =>
+          loadData ? loadData({ getState: store.getState, params, query }) : []
+        )
+        // @ts-ignore
+        .flat()
+        .filter((item) => !!item)
+        .forEach(dispatch);
+
+    setPathURL(currentPathURL);
   }
   return(<div>
     {renderRoutes(route.routes)}
