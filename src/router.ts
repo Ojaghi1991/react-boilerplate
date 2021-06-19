@@ -1,5 +1,6 @@
-import App from './components';
+import App from './app/app';
 import pages from './pages';
+import { userAction } from './redux/actions';
 
 export default [
   {
@@ -9,6 +10,7 @@ export default [
         path: '/',
         exact: true,
         component: pages.Dashboard,
+        loadData: () => [userAction.loadAll()]
       },
       {
         component: pages.NotFound,
