@@ -7,6 +7,7 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { renderRoutes, matchRoutes } from 'react-router-config';
 import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
+import { ServerStyleSheet, StyleSheetManager } from "styled-components";
 
 import htmlContent from '../utils/htmlContent';
 import { axiosHelper, dispatchHelper }  from '../helpers';
@@ -29,7 +30,8 @@ expressApp.get('*', (req: express.Request, res: express.Response) => {
   const { "application-api-token": token } = req.cookies || {};
   const extractor = new ChunkExtractor({ statsFile });
   const store = createStore({});
- 
+  const sheet = new ServerStyleSheet();
+
   const loadData = () => {
     const promises = matchRoutes(routes, req.path)
     
@@ -65,7 +67,9 @@ expressApp.get('*', (req: express.Request, res: express.Response) => {
         <ChunkExtractorManager extractor={extractor}>
           <Provider store={store}>
             <StaticRouter location={req.path} context={{}}>
+            <StyleSheetManager sheet={sheet.instance}>
               {renderRoutes(routes)}
+              </StyleSheetManager>
             </StaticRouter>
           </Provider>
         </ChunkExtractorManager>
@@ -76,7 +80,10 @@ expressApp.get('*', (req: express.Request, res: express.Response) => {
     console.error(`==> render error ${JSON.stringify(error)}`);
     res.status(404).send("Not Found :(");
     console.error(error);
-   }
+   } finally {
+    sheet.seal();
+  }
+   
   })();
 });
 

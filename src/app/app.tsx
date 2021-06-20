@@ -3,8 +3,9 @@ import { hot } from 'react-hot-loader';
 import { useDispatch } from "react-redux";
 import { matchRoutes, renderRoutes } from "react-router-config";
 import { urlHelper } from "../helpers"
-import { get } from 'lodash';
 
+import StyledWrapper from './app.style'
+import GlobalStyle from "./global.style";
 const App = ({location, route, store}:any) => {
   const currentPathURL = location.pathname + location.search;
 
@@ -43,9 +44,12 @@ const App = ({location, route, store}:any) => {
 
     setPathURL(currentPathURL);
   }
-  return(<div>
-    {renderRoutes(route.routes)}
-  </div>)
+  return(<>
+    <GlobalStyle />
+    <StyledWrapper backgroundColor="#ff00ff"> 
+      {renderRoutes(route.routes)}
+    </StyledWrapper>
+  </>)
 }
 
 export default hot(module)(App);
