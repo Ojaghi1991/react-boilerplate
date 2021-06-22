@@ -5,6 +5,7 @@ type Props = {
 };
 
 export default styled.div(
-    ({ backgroundColor }: Props) => css`
-        background-color: ${backgroundColor};    
-`);
+  ({ backgroundColor }: Props) => css`
+    background-color: ${backgroundColor};
+  `
+);

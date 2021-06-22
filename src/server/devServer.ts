@@ -1,16 +1,17 @@
-import webpack from 'webpack';
-import devMiddleware from 'webpack-dev-middleware';
-import hotMiddleware from 'webpack-hot-middleware';
+import webpack from "webpack";
+import devMiddleware from "webpack-dev-middleware";
+import hotMiddleware from "webpack-hot-middleware";
 
-import webpackConfig from '../../webpack.config.js';
+import webpackConfig from "../../webpack.config.js";
+import config from "../../config";
 
 const devServer = (expressApp: any) => {
-  const PORT = process.env.PORT || 3000;
+  const { port } = config;
   const compiler = webpack(webpackConfig);
   const instance = devMiddleware(compiler, {
-    headers: { 'Access-Control-Allow-Origin': '*' },
+    headers: { "Access-Control-Allow-Origin": "*" },
     publicPath: webpackConfig.output.publicPath,
-    stats: 'minimal',
+    stats: "minimal",
     serverSideRender: true,
     watchOptions: {
       ignored: /node_modules/,
@@ -21,7 +22,7 @@ const devServer = (expressApp: any) => {
 
   instance.waitUntilValid(() => {
     console.clear();
-    console.log(`Development Server is now running on port ${PORT} ...`);
+    console.log(`Development Server is now running on port ${port} ...`);
   });
 
   expressApp.use(hotMiddleware(compiler));
