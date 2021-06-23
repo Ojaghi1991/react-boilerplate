@@ -1,9 +1,11 @@
 import { matchRoutes } from "react-router-config";
+import { dispatchHelper } from "helpers";
+
 import routes from "../router";
-import { dispatchHelper } from "../helpers";
 
 export default (req, store) => {
   const { "application-api-token": token } = req.cookies || {};
+
   const promises = matchRoutes(routes, req.path)
     .map(({ route, match }: Record<string, any>) =>
       route.loadData

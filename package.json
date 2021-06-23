@@ -9,6 +9,9 @@
     "clean": "rimraf ./dist",
     "lint": "eslint --fix . --ext .jsx,.ts,.tsx"
   },
+  "resolutions": {
+    "styled-components": "^5"
+  },
   "dependencies": {
     "@hot-loader/react-dom": "^16.13.0",
     "@loadable/component": "^5.15.0",
@@ -65,6 +68,7 @@
     "html-webpack-plugin": "^5.1.0",
     "nodemon": "^2.0.7",
     "npm-run-all": "^4.1.5",
+    "pnp-webpack-plugin": "^1.6.4",
     "prettier": "^2.3.1",
     "rimraf": "^3.0.2",
     "ts-loader": "^8.0.17",

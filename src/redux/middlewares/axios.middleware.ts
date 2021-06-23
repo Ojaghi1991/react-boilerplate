@@ -1,6 +1,6 @@
 import { call, put } from "redux-saga/effects";
 
-import { axiosHelper } from "../../helpers";
+import { axiosHelper } from "helpers";
 
 export default function* axiosMiddleware(action: any) {
   const { type, resolve, reject, ...params } = action;

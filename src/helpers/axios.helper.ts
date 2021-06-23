@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import FormData from "form-data";
 import { isEmpty, isNumber } from "lodash";
-import config from "../../config";
+import config from "config";
 
 const cookies = new Cookies();
 

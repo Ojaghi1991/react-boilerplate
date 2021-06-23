@@ -7,7 +7,8 @@ import { StaticRouter } from "react-router-dom";
 import { renderRoutes } from "react-router-config";
 import { renderToString } from "react-dom/server";
 import { Helmet } from "react-helmet";
-import htmlContent from "../utils/htmlContent";
+
+import htmlContent from "utils";
 
 import routes from "../router";
 
@@ -17,7 +18,8 @@ const extractor = new ChunkExtractor({ statsFile });
 const head = Helmet.renderStatic();
 
 export default (req, options) => {
-  const { store, sheet } = options;
+  const { sheet, store } = options;
+
   const initialState: any = store.getState();
 
   const component = (

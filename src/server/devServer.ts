@@ -2,8 +2,9 @@ import webpack from "webpack";
 import devMiddleware from "webpack-dev-middleware";
 import hotMiddleware from "webpack-hot-middleware";
 
-import webpackConfig from "../../webpack.config.js";
-import config from "../../config";
+import config from "config";
+
+import webpackConfig from "webpack.config.js";
 
 const devServer = (expressApp: any) => {
   const { port } = config;

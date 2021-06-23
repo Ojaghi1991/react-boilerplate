@@ -1,11 +1,11 @@
 import express from "express";
 import { ServerStyleSheet } from "styled-components";
 
+import config from "config";
+import createStore from "redux/store";
 import devServer from "./devServer";
-import createStore from "../redux/store";
-import loadServerSideData from "./serverSideApiCall";
-import RenderServerSideHtml from "./RenderServerSideHtml";
-import config from "../../config";
+import serverSideApiCall from "./serverSideApiCall";
+import ServerSideHtml from "./ServerSideHtml";
 
 const { port } = config;
 const expressApp = express();
@@ -18,21 +18,22 @@ if (process.env.NODE_ENV === "development") {
 
 expressApp.get("*", (req: express.Request, res: express.Response) => {
   const store = createStore({});
+  const sheet = new ServerStyleSheet();
 
   (async () => {
-    const sheet = new ServerStyleSheet();
+    // dispatch all loadData action which are in router.ts
     try {
-      // dispatch actions in loadData in router.ts
-      await loadServerSideData(req, store);
-    } catch (err) {
-      // @ts-ignore
-      if (global.DEV) console.error(`==> Data error ${JSON.stringify(err)}`);
+      await serverSideApiCall(req, store);
+    } catch (e) {
+      console.log(e);
     }
 
+    // load reactjs component in the server and render it to html and send it to client as html
     try {
-      return res.send(RenderServerSideHtml(req, { store, sheet }));
+      return res.send(ServerSideHtml(req, { sheet, store }));
     } catch (error) {
       console.error(`==> render error ${JSON.stringify(error)}`);
+
       return res.status(404).send("Not Found :(");
     } finally {
       sheet.seal();

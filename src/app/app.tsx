@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { hot } from "react-hot-loader";
 import { useDispatch } from "react-redux";
 import { matchRoutes, renderRoutes } from "react-router-config";
-import { urlHelper } from "../helpers";
+import { urlHelper } from "helpers";
 
 import StyledWrapper from "./app.style";
 import GlobalStyle from "./global.style";

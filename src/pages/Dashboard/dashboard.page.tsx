@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { connect } from "react-redux";
-import { userAction } from "../../redux/actions";
+import { userAction } from "redux/actions";
 
 const handleAction = (props: any) => {
   const { dispatch } = props;

@@ -1,6 +1,7 @@
+import { userAction } from "redux/actions";
+
 import App from "./app/app";
 import pages from "./pages";
-import { userAction } from "./redux/actions";
 
 export default [
   {
