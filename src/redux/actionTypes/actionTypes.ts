@@ -1,8 +1,8 @@
-import { single, promise } from './typeGenerator';
+import { single, promise } from "./typeGenerator";
 
 export default [
   // Single Actions
-  single('sample'),
+  single("sample"),
 
   /**
    * Promise Actions -> Second arguments guide
@@ -12,5 +12,5 @@ export default [
    * u: UPDATE
    * d: DELETE
    */
-  promise('user','claud'),
+  promise("user", "claud"),
 ];

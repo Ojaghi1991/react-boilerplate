@@ -4,16 +4,15 @@ export const initialState = {
   fetching: undefined,
 };
 
-export default (state = initialState, action:any) => {
+export default (state = initialState, action: any) => {
   switch (action.type) {
-     /**
+    /**
      * LOAD_ALL_USER
      */
     case ActionTypes.LOAD_ALL_USER_REQUESTING:
       return {
         ...state,
         fetching: true,
-        errors: action
       };
 
     case ActionTypes.LOAD_ALL_USER_SUCCESS:

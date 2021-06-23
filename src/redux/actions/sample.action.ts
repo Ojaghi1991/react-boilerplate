@@ -1,6 +1,6 @@
-import ActionTypes from '../actionTypes';
+import ActionTypes from "../actionTypes";
 
-export default function(id:string) {
+export default function sample(id: string) {
   return {
     type: ActionTypes.SAMPLE,
     data: id,

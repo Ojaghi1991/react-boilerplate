@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { hot } from 'react-hot-loader';
+import React, { useState } from "react";
+import { hot } from "react-hot-loader";
 import { useDispatch } from "react-redux";
 import { matchRoutes, renderRoutes } from "react-router-config";
-import { urlHelper } from "../helpers"
+import { urlHelper } from "helpers";
 
-import StyledWrapper from './app.style'
+import StyledWrapper from "./app.style";
 import GlobalStyle from "./global.style";
-const App = ({location, route, store}:any) => {
+
+const App = ({ location, route, store }: any) => {
   const currentPathURL = location.pathname + location.search;
 
   const [pathURL, setPathURL] = useState(currentPathURL);
@@ -26,30 +27,29 @@ const App = ({location, route, store}:any) => {
   /*
    * prevent dispatch action in client side
    * while it was dispatch on server side
-  */
-  if(
-    typeof window === "object" && 
-    (currentPathURL !== pathURL )
-  ) {
+   */
+  if (typeof window === "object" && currentPathURL !== pathURL) {
     // fetch all action from loadData and filter the falsy
     // finally dispatch it
     matchedRoutes
-        .map(({ route: { loadData } }) =>
-          loadData ? loadData({ getState: store.getState, params, query }) : []
-        )
-        // @ts-ignore
-        .flat()
-        .filter((item) => !!item)
-        .forEach(dispatch);
+      .map(({ route: { loadData } }) =>
+        loadData ? loadData({ getState: store.getState, params, query }) : []
+      )
+      // @ts-ignore
+      .flat()
+      .filter((item) => !!item)
+      .forEach(dispatch);
 
     setPathURL(currentPathURL);
   }
-  return(<>
-    <GlobalStyle />
-    <StyledWrapper backgroundColor="#ff00ff"> 
-      {renderRoutes(route.routes)}
-    </StyledWrapper>
-  </>)
-}
+  return (
+    <>
+      <GlobalStyle />
+      <StyledWrapper backgroundColor="#ff0000">
+        {renderRoutes(route.routes)}
+      </StyledWrapper>
+    </>
+  );
+};
 
 export default hot(module)(App);

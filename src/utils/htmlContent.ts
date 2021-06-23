@@ -1,11 +1,10 @@
 import serialize from "serialize-javascript";
 
-
 export default (
   head: Record<string, any>,
   content: string,
   extractor: Record<string, any>,
-  initialState: Record<string, unknown> 
+  initialState: Record<string, unknown>
 ): any => {
   const htmlContent = `
     <!doctype html>

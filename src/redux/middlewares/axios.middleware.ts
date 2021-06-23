@@ -1,14 +1,9 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put } from "redux-saga/effects";
 
-import { axiosHelper }  from '../../helpers';
+import { axiosHelper } from "helpers";
 
 export default function* axiosMiddleware(action: any) {
-  const {
-    type,
-    resolve,
-    reject,
-    ...params
-  } = action;
+  const { type, resolve, reject, ...params } = action;
 
   yield put({ type: `${type}_REQUESTING`, ...params });
 

@@ -1,5 +1,5 @@
 export function flattener(constants: any): any {
-  //@ts-ignore
+  // @ts-ignore
   return constants.flat().reduce((acc, constant) => {
     acc[constant] = constant;
     return acc;
