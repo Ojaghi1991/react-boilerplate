@@ -1,18 +1,40 @@
-import React, { FC } from "react";
-import { connect } from "react-redux";
-import { userAction } from "redux/actions";
+import React from "react";
+import { Link } from "react-router-dom";
 
-const handleAction = (props: any) => {
-  const { dispatch } = props;
-  dispatch(userAction.loadAll());
+import { userAction } from "redux/actions";
+import { connectHelper } from "helpers";
+
+const handleAction = (promise: any) => promise(userAction.loadAll());
+
+const connect = connectHelper((state) => ({
+  users: state.user,
+}));
+
+type Props = {
+  promise: any;
+  users: any;
 };
 
-const Dashboard: FC = (props) => (
+const Dashboard = ({
+  promise,
+  users: { data = [], fetching = true },
+}: Props) => (
   <div>
-    <button type="button" onClick={() => handleAction(props)}>
+    <Link to="/about">About Page</Link>
+    <button type="button" onClick={() => handleAction(promise)}>
       call Action
     </button>
+    <h3>Users Data:</h3>
+    {fetching ? (
+      <div>Loading...</div>
+    ) : (
+      <ul>
+        {data.map((item) => (
+          <li key={item.id}>{item.name}</li>
+        ))}
+      </ul>
+    )}
   </div>
 );
 
-export default connect()(Dashboard);
+export default connect(Dashboard);
