@@ -14,6 +14,12 @@ export default [
         loadData: () => [userAction.loadAll()],
       },
       {
+        path: "/about",
+        exact: true,
+        component: pages.About,
+        loadData: () => [userAction.loadAll()],
+      },
+      {
         component: pages.NotFound,
       },
     ],

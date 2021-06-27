@@ -15,9 +15,15 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        use: "ts-loader",
+        test: /\.(j|t)sx?$/,
         exclude: /node_modules/,
+        use: {
+          loader: require.resolve("babel-loader"),
+          options: {
+            cacheDirectory: isDev,
+            presets: ["@babel/preset-env"],
+          },
+        },
       },
     ],
   },
