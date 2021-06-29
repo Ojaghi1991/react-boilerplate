@@ -27,7 +27,6 @@ expressApp.get("*", (req: express.Request, res: express.Response) => {
     } catch (e) {
       console.log(e);
     }
-
     // load reactjs component in the server and render it to html and send it to client as html
     try {
       return res.send(ServerSideHtml(req, { sheet, store }));

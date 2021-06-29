@@ -12,13 +12,12 @@ import htmlContent from "utils";
 
 import routes from "../router";
 
-const statsFile = path.resolve("./dist/loadable-stats.json");
-const extractor = new ChunkExtractor({ statsFile });
-
-const head = Helmet.renderStatic();
-
 export default (req, options) => {
   const { sheet, store } = options;
+  const statsFile = path.resolve("./dist/loadable-stats.json");
+  const extractor = new ChunkExtractor({ statsFile });
+
+  const head = Helmet.renderStatic();
 
   const initialState: any = store.getState();
 
@@ -33,6 +32,7 @@ export default (req, options) => {
       </Provider>
     </ChunkExtractorManager>
   );
+
   const content = renderToString(component);
   return htmlContent(head, content, extractor, initialState);
 };
