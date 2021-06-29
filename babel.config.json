@@ -20,14 +20,6 @@
     "react-hot-loader/babel",
     "@loadable/babel-plugin",
     "@babel/plugin-proposal-class-properties",
-    [
-      "import",
-      {
-        "libraryName": "antd",
-        "libraryDirectory": "es",
-        "style": true
-      }
-    ],
     ["styled-components"],
     ["@babel/plugin-transform-runtime"]
   ],
