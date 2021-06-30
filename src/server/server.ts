@@ -1,5 +1,9 @@
+import path from "path";
 import express from "express";
 import { ServerStyleSheet } from "styled-components";
+import compression from "compression";
+import hpp from "hpp";
+import helmet from "helmet";
 
 import config from "config";
 import createStore from "redux/store";
@@ -10,7 +14,10 @@ import ServerSideHtml from "./ServerSideHtml";
 const { port } = config;
 const expressApp = express();
 
-expressApp.use(express.static("../../dist"));
+expressApp.use(compression());
+expressApp.use(hpp());
+expressApp.use(helmet());
+expressApp.use(express.static(path.resolve(process.cwd(), "dist")));
 
 if (process.env.NODE_ENV === "development") {
   devServer(expressApp);

@@ -1,11 +1,7 @@
 import styled, { css } from "styled-components";
 
-type Props = {
-  backgroundColor: string;
-};
-
 export default styled.div(
-  ({ backgroundColor }: Props) => css`
+  ({ backgroundColor }) => css`
     background-color: ${backgroundColor};
   `
 );

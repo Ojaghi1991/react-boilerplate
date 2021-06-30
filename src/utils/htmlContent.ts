@@ -1,3 +1,4 @@
+import { minify } from "html-minifier";
 import serialize from "serialize-javascript";
 
 export default (
@@ -34,6 +35,16 @@ export default (
       </body>
     </html>
   `;
+  const minifyConfig = {
+    collapseWhitespace: true,
+    removeComments: true,
+    trimCustomFragments: true,
+    minifyCSS: true,
+    minifyJS: true,
+    minifyURLs: true,
+  };
 
-  return htmlContent;
+  return process.env.NODE_ENV === "development"
+    ? htmlContent
+    : minify(htmlContent, minifyConfig);
 };
