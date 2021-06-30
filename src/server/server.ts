@@ -1,3 +1,4 @@
+import path from "path";
 import express from "express";
 import { ServerStyleSheet } from "styled-components";
 
@@ -10,7 +11,7 @@ import ServerSideHtml from "./ServerSideHtml";
 const { port } = config;
 const expressApp = express();
 
-expressApp.use(express.static("../../dist"));
+expressApp.use(express.static(path.resolve(process.cwd(), "dist")));
 
 if (process.env.NODE_ENV === "development") {
   devServer(expressApp);
