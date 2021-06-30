@@ -21,7 +21,15 @@
     "@loadable/babel-plugin",
     "@babel/plugin-proposal-class-properties",
     ["styled-components"],
-    ["@babel/plugin-transform-runtime"]
+    ["@babel/plugin-transform-runtime"],
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "libraryDirectory": "es",
+        "style": true
+      }
+    ]
   ],
   "env": {
     "production": {

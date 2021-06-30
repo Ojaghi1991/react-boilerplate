@@ -2,8 +2,9 @@ const path = require("path");
 const webpack = require("webpack");
 const LoadablePlugin = require("@loadable/webpack-plugin");
 const PnpWebpackPlugin = require("pnp-webpack-plugin");
-
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserJSPlugin = require("terser-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const mode = process.env.NODE_ENV || "development";
 const isDev = mode === "development";
@@ -17,6 +18,10 @@ const loadPlugins = () => {
       CLIENT: true,
       DEV: isDev,
       "process.env": {},
+    }),
+    new MiniCssExtractPlugin({
+      filename: isDev ? "[name].css" : "[name].[contenthash:8].css",
+      chunkFilename: isDev ? "[id].css" : "[id].[contenthash:8].css",
     }),
   ];
 
@@ -50,6 +55,46 @@ module.exports = {
         },
       },
       {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: isDev,
+              reloadAll: true,
+            },
+          },
+          {
+            loader: "css",
+            options: {
+              importLoaders: 1,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: "css",
+            options: {
+              importLoaders: 3,
+            },
+          },
+          {
+            loader: "less",
+            options: {
+              lessOptions: {
+                javascriptEnabled: true,
+              },
+            },
+          },
+        ],
+      },
+      {
         test: /\.(woff2?|ttf|otf|eot)$/,
         use: {
           loader: "url",
@@ -58,7 +103,7 @@ module.exports = {
     ],
   },
   optimization: {
-    minimizer: [new TerserJSPlugin({})],
+    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
   },
   // Telling webpack which extensions
   // we are interested in.

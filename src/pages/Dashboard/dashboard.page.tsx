@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Button } from "antd";
 
 import { userAction } from "redux/actions";
 import { connectHelper } from "helpers";
@@ -21,9 +22,7 @@ const Dashboard = ({
 }: Props) => (
   <div>
     <Link to="/about">About Page</Link>
-    <button type="button" onClick={() => handleAction(promise)}>
-      call Action
-    </button>
+    <Button onClick={() => handleAction(promise)}>call Action</Button>
     <h3>Users Data:</h3>
     {fetching ? (
       <div>Loading...</div>
