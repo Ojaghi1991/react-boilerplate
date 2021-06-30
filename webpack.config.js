@@ -3,9 +3,33 @@ const webpack = require("webpack");
 const LoadablePlugin = require("@loadable/webpack-plugin");
 const PnpWebpackPlugin = require("pnp-webpack-plugin");
 
+const TerserJSPlugin = require("terser-webpack-plugin");
+
 const mode = process.env.NODE_ENV || "development";
 const isDev = mode === "development";
+const loadPlugins = () => {
+  const plugins = [
+    new LoadablePlugin({
+      writeToDisk: true,
+      filename: "./loadable-stats.json",
+    }),
+    new webpack.DefinePlugin({
+      CLIENT: true,
+      DEV: isDev,
+      "process.env": {},
+    }),
+  ];
 
+  if (isDev) {
+    plugins.push(
+      // webpack-hot-middleware
+      new webpack.HotModuleReplacementPlugin()
+    );
+  } else {
+    plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
+  }
+  return plugins;
+};
 module.exports = {
   devtool: isDev ? "eval-source-map" : false,
   entry: isDev
@@ -25,25 +49,20 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.(woff2?|ttf|otf|eot)$/,
+        use: {
+          loader: "url",
+        },
+      },
     ],
   },
-
+  optimization: {
+    minimizer: [new TerserJSPlugin({})],
+  },
   // Telling webpack which extensions
   // we are interested in.
-  plugins: isDev
-    ? [
-        new webpack.HotModuleReplacementPlugin(),
-        new LoadablePlugin({
-          writeToDisk: true,
-          filename: "./loadable-stats.json",
-        }),
-      ]
-    : [
-        new LoadablePlugin({
-          writeToDisk: true,
-          filename: "./loadable-stats.json",
-        }),
-      ],
+  plugins: loadPlugins(),
   resolve: {
     alias: {
       "react-dom": "@hot-loader/react-dom",
