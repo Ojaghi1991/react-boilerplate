@@ -1,7 +1,15 @@
 import React from "react";
 import { Formik, Form } from "formik";
 
-import { Checkbox, Input, Radio, Select, Submit, Textarea } from "components";
+import {
+  Checkbox,
+  Input,
+  Radio,
+  Select,
+  Submit,
+  Switch,
+  Textarea,
+} from "components";
 
 export default (props: any): JSX.Element => {
   const { initialValues, onSubmit } = props;
@@ -41,6 +49,7 @@ export default (props: any): JSX.Element => {
                 { key: "range", title: "Date Range" },
               ]}
             />
+            <Switch formik={formik} label="Switch" name="switch" />
             <Submit formik={formik} label="Submit" />
           </Form>
         )}
