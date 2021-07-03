@@ -5,6 +5,7 @@ import {
   Checkbox,
   DatePicker,
   Input,
+  InputNumber,
   Radio,
   Select,
   Submit,
@@ -64,6 +65,11 @@ export default (props: any): JSX.Element => {
               name="time_picker"
               size="large"
               showNow={false}
+            />
+            <InputNumber
+              formik={formik}
+              name="input_number"
+              label="Input Number"
             />
             <Submit formik={formik} label="Submit" />
           </Form>
