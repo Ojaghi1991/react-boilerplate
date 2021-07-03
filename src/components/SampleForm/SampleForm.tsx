@@ -3,12 +3,14 @@ import { Formik, Form } from "formik";
 
 import {
   Checkbox,
+  DatePicker,
   Input,
   Radio,
   Select,
   Submit,
   Switch,
   Textarea,
+  TimePicker,
 } from "components";
 
 export default (props: any): JSX.Element => {
@@ -50,6 +52,19 @@ export default (props: any): JSX.Element => {
               ]}
             />
             <Switch formik={formik} label="Switch" name="switch" />
+            <DatePicker
+              formik={formik}
+              name="date_picker"
+              showTime={{ format: "HH:mm" }}
+              format="YYYY-MM-DD HH:mm a"
+              placeholder="Select preferred date and time"
+            />
+            <TimePicker
+              formik={formik}
+              name="time_picker"
+              size="large"
+              showNow={false}
+            />
             <Submit formik={formik} label="Submit" />
           </Form>
         )}
