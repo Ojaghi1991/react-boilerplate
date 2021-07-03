@@ -12,6 +12,7 @@ import {
   Switch,
   Textarea,
   TimePicker,
+  Upload,
 } from "components";
 
 export default (props: any): JSX.Element => {
@@ -70,6 +71,16 @@ export default (props: any): JSX.Element => {
               formik={formik}
               name="input_number"
               label="Input Number"
+            />
+            <Upload
+              fileType="image"
+              formik={formik}
+              listType="picture-card"
+              loading={false}
+              multiple={false}
+              name="image"
+              showDefaultImage
+              uploadButtonText="Add Image"
             />
             <Submit formik={formik} label="Submit" />
           </Form>
