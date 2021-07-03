@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Form } from "formik";
 import { Button } from "antd";
 
-import { Input, Textarea } from "components/Form";
+import { Input, Textarea, Checkbox } from "components/Form";
 
 export default (props: any): JSX.Element => {
   const { initialValues, onSubmit } = props;
@@ -18,6 +18,7 @@ export default (props: any): JSX.Element => {
             <Form>
               <Input name="first_name" />
               <Textarea name="description" />
+              <Checkbox name="is_checked" label="Check Mark" />
 
               <div className="time-shift-bar time-shift-bar--footer">
                 <Button
