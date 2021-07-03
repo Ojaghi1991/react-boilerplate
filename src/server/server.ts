@@ -18,7 +18,10 @@ expressApp.use(compression());
 expressApp.use(hpp());
 expressApp.use(helmet());
 expressApp.use(express.static(path.resolve(process.cwd(), "dist")));
-
+expressApp.use(
+  "/assets",
+  express.static(path.resolve(process.cwd(), "assets"))
+);
 if (process.env.NODE_ENV === "development") {
   devServer(expressApp);
 }
