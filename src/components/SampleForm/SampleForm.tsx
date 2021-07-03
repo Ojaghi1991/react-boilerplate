@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form } from "formik";
 
-import { Input, Textarea, Checkbox, Select, Submit } from "components";
+import { Checkbox, Input, Radio, Select, Submit, Textarea } from "components";
 
 export default (props: any): JSX.Element => {
   const { initialValues, onSubmit } = props;
@@ -29,6 +29,17 @@ export default (props: any): JSX.Element => {
                 key: "key",
                 title: "title",
               }}
+            />
+            <Radio
+              formik={formik}
+              name="radio"
+              label="Date"
+              options={[
+                { key: "today", title: "Today" },
+                { key: "week", title: "This Week" },
+                { key: "month", title: "This Month" },
+                { key: "range", title: "Date Range" },
+              ]}
             />
             <Submit formik={formik} label="Submit" />
           </Form>
