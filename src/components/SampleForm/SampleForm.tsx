@@ -2,6 +2,7 @@ import React from "react";
 import { Formik, Form } from "formik";
 
 import {
+  Address,
   Checkbox,
   DatePicker,
   Input,
@@ -82,6 +83,16 @@ export default (props: any): JSX.Element => {
               showDefaultImage
               uploadButtonText="Add Image"
             />
+
+            {/* 
+             * NOTE: inorder to use this componet first need to generate google api key then past to common.ts file
+            
+             <Address
+              formik={formik}
+              label="Address"
+              name="address"
+              placeholder="Enter your address"
+            /> */}
             <Submit formik={formik} label="Submit" />
           </Form>
         )}
