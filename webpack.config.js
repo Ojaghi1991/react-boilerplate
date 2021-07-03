@@ -111,6 +111,7 @@ module.exports = {
   resolve: {
     alias: {
       "react-dom": "@hot-loader/react-dom",
+      assets: path.resolve(__dirname, "assets"),
       components: path.resolve(__dirname, "src/components"),
       utils: path.resolve(__dirname, "src/utils"),
       config: path.resolve(__dirname, "config"),
