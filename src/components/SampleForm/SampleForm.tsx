@@ -2,37 +2,27 @@ import React from "react";
 import { Formik, Form } from "formik";
 import { Button } from "antd";
 
-import { Input, Textarea, Checkbox } from "components/Form";
+import { Input, Textarea, Checkbox, Submit } from "components";
 
 export default (props: any): JSX.Element => {
   const { initialValues, onSubmit } = props;
 
   return (
     <div>
-      <div className="tabs-container">
-        <Formik
-          initialValues={{ first_name: "", description: "", ...initialValues }}
-          onSubmit={onSubmit}
-        >
-          {() => (
-            <Form>
-              <Input name="first_name" />
-              <Textarea name="description" />
-              <Checkbox name="is_checked" label="Check Mark" />
+      <Formik
+        initialValues={{ first_name: "", description: "", ...initialValues }}
+        onSubmit={onSubmit}
+      >
+        {(formik) => (
+          <Form>
+            <Input name="first_name" />
+            <Textarea name="description" />
+            <Checkbox name="is_checked" label="Check Mark" />
 
-              <div className="time-shift-bar time-shift-bar--footer">
-                <Button
-                  htmlType="submit"
-                  className="primary-green primary-green--submit"
-                  onClick={onSubmit}
-                >
-                  Submit
-                </Button>
-              </div>
-            </Form>
-          )}
-        </Formik>
-      </div>
+            <Submit formik={formik} label="Submit" />
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };
