@@ -1,6 +1,6 @@
 import { userAction } from "redux/actions";
 
-import App from "./app/app";
+import App, { Authorized, Unauthorized } from "./app";
 import pages from "./pages";
 
 export default [
@@ -14,10 +14,32 @@ export default [
         loadData: () => [userAction.loadAll()],
       },
       {
-        path: "/about",
-        exact: true,
-        component: pages.About,
-        loadData: () => [userAction.loadAll()],
+        // Unauthorized
+        path: "/auth",
+        component: Unauthorized,
+        routes: [
+          {
+            path: "/auth/login",
+            component: pages.Login,
+          },
+        ],
+      },
+      {
+        // Authorized
+        component: Authorized,
+        routes: [
+          {
+            path: "/about",
+            exact: true,
+            component: pages.About,
+            loadData: () => [userAction.loadAll()],
+          },
+          {
+            path: "/me",
+            exact: true,
+            component: pages.Me,
+          },
+        ],
       },
       {
         component: pages.NotFound,

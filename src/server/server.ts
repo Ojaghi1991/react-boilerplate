@@ -3,10 +3,12 @@ import express from "express";
 import { ServerStyleSheet } from "styled-components";
 import compression from "compression";
 import hpp from "hpp";
+import cookieParser from "cookie-parser";
 import helmet from "helmet";
 
 import config from "config";
 import createStore from "redux/store";
+import ActionTypes from "redux/actionTypes";
 import devServer from "./devServer";
 import serverSideApiCall from "./serverSideApiCall";
 import ServerSideHtml from "./ServerSideHtml";
@@ -16,6 +18,7 @@ const expressApp = express();
 
 expressApp.use(compression());
 expressApp.use(hpp());
+expressApp.use(cookieParser());
 expressApp.use(helmet());
 expressApp.use(express.static(path.resolve(process.cwd(), "dist")));
 expressApp.use(
@@ -29,8 +32,14 @@ if (process.env.NODE_ENV === "development") {
 expressApp.get("*", (req: express.Request, res: express.Response) => {
   const store = createStore({});
   const sheet = new ServerStyleSheet();
-
+  const { appToken = "" } = req.cookies;
   (async () => {
+    // if there is token dispatch profile api
+    if (appToken) {
+      // Note: you can call api with axiosHelper in this part
+      // take the result and dispatch it in redux
+      store.dispatch({ type: ActionTypes.SAMPLE, data: appToken });
+    }
     // dispatch all loadData action which are in router.ts
     try {
       await serverSideApiCall(req, store);
