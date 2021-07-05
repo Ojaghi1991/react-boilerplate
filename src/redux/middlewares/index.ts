@@ -1,3 +1,4 @@
 import * as axiosMiddleware from "./axios.middleware";
+import * as wsMiddleware from "./ws.middleware";
 
-export default axiosMiddleware;
+export { axiosMiddleware, wsMiddleware };

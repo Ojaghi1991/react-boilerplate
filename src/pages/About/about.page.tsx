@@ -9,10 +9,18 @@ const handleAction = (props: any) => {
   dispatch(userAction.loadAll());
 };
 
+const wsMessage = (props: any) => {
+  const { ws } = props;
+  ws.sendMessage("hello message");
+};
+
 const Dashboard: FC = (props) => (
   <div>
     <Link to="/">Dashboard</Link>
     <button type="button" onClick={() => handleAction(props)}>
+      About Page
+    </button>
+    <button type="button" onClick={() => wsMessage(props)}>
       About Page
     </button>
   </div>

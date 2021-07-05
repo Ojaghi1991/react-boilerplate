@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { hot } from "react-hot-loader";
 import { useDispatch } from "react-redux";
 import { matchRoutes, renderRoutes } from "react-router-config";
-import { urlHelper } from "helpers";
+import { urlHelper, WSHelper } from "helpers";
 
 import StyledWrapper from "./app.style";
 import GlobalStyle from "./global.style";
@@ -24,6 +24,7 @@ const App = ({ location, route, store }: any) => {
   // get dispatch method to dispatch action in client side
   const dispatch = useDispatch();
 
+  const ws = new WSHelper("ChatroomsChannel", dispatch);
   /*
    * prevent dispatch action in client side
    * while it was dispatch on server side
@@ -46,7 +47,7 @@ const App = ({ location, route, store }: any) => {
     <>
       <GlobalStyle />
       <StyledWrapper backgroundColor="#ff0000">
-        {renderRoutes(route.routes)}
+        {renderRoutes(route.routes, { ws })}
       </StyledWrapper>
     </>
   );

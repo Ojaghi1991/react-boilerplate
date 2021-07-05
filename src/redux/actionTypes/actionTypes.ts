@@ -1,8 +1,13 @@
-import { single, promise } from "./typeGenerator";
+import { single, socket, promise } from "./typeGenerator";
 
 export default [
   // Single Actions
   single("sample"),
+
+  // WS
+  socket("get_room"),
+  socket("get_rooms"),
+  socket("send_message"),
 
   /**
    * Promise Actions -> Second arguments guide
