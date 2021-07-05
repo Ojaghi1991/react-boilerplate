@@ -21,7 +21,7 @@ const Dashboard = ({
   users: { data = [], fetching = true },
 }: Props) => (
   <div>
-    <Link to="/about">About Page</Link>
+    <Link to="/about">Dashboard</Link>
     <Button onClick={() => handleAction(promise)}>call Action</Button>
     <h3>Users Data:</h3>
     {fetching ? (
