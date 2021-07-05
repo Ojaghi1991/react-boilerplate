@@ -20,6 +20,11 @@ export default [
         loadData: () => [userAction.loadAll()],
       },
       {
+        path: "/sample-form",
+        exact: true,
+        component: pages.Sample,
+      },
+      {
         component: pages.NotFound,
       },
     ],

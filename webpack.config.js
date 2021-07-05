@@ -23,6 +23,7 @@ const loadPlugins = () => {
       filename: isDev ? "[name].css" : "[name].[contenthash:8].css",
       chunkFilename: isDev ? "[id].css" : "[id].[contenthash:8].css",
     }),
+    new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en-au/),
   ];
 
   if (isDev) {

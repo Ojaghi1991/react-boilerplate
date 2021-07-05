@@ -1,6 +1,8 @@
 import { minify } from "html-minifier";
 import serialize from "serialize-javascript";
+import config from "config";
 
+const API_KEY = config.googleMapApiKey;
 export default (
   head: Record<string, any>,
   content: string,
@@ -25,6 +27,7 @@ export default (
         <div id="react-view">${content}</div>
         
         <!-- Store the initial state into window -->
+        <script src="${`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places`}"></script>
         <script>
           // Use serialize-javascript for mitigating XSS attacks. See the following security issues:
           // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
